@@ -1,36 +1,20 @@
-async function fetchUsersAndSummarize(url) {
-  const data = fetch(url);
+async function fetchUsersAndSummarize() {
+  const data = fetch("https://jsonplaceholder.typicode.com/users");
   data
     .then((response) => {
       if (!response.ok) {
-        console.error(`Bad response!`);
-        return;
+        throw new Error(`The error is: ${response.status}`);
       } else {
-        const newData = response.json();
-        console.log(newData);
-        return newData;
+        return response.json();
       }
     })
-    .then((response) => {
-      const filteredResponse = response.filter((find) =>
-        find.address.city.includes("C".charAt(0))
+    .then((msg) => {
+      const dataWeWant = msg.filter((item) =>
+        item.address.city.startsWith("C")
       );
-      console.log(filteredResponse);
+      console.table(dataWeWant);
     })
-    .catch((response) => {
-      console.error(`The error is: ${response}`);
-      return;
-    });
+    .catch((err) => console.log(err));
 }
 
-async function Success() {
-  await fetchUsersAndSummarize("https://jsonplaceholder.typicode.com/users");
-}
-async function failureDemonstration() {
-  await fetchUsersAndSummarize("https://jsonplaceholder.typicode.com/u5ers");
-}
-
-console.log(`From succss: ${Success()}`);
-setTimeout(() => {
-  console.log(`From failure:${failureDemonstration()}`);
-}, 10000);
+fetchUsersAndSummarize();
