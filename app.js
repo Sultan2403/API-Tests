@@ -28,4 +28,34 @@ async function fetchUsersAndSummarize() {
     .catch((err) => console.log(err));
 }
 
+async function successDemonstration() {
+  const data = fetch("https://jsonplaceholder.typicode.com/users");
+  data
+    .then(
+      console.log(
+        "From success demonstration: As expected, here I am as long as there are no errors :)"
+      )
+    )
+    .catch(
+      console.log(
+        "From success demonstration: I'll never run as long as there are no errors!"
+      )
+    );
+}
+async function failureDemo() {
+  const data = fetch("https://jsonplaceholder.typicode.com/users");
+  data
+    .then(
+      console.log(
+        "From failure demonstration: I'll never run as long as that link remains invalid!"
+      )
+    )
+    .catch(
+      console.log(
+        "From failure demonstration: As expected, here I am as long as that link remains invalid :)"
+      )
+    );
+}
 fetchUsersAndSummarize();
+successDemonstration();
+failureDemo();
