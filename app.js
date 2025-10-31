@@ -13,7 +13,7 @@ async function fetchUsersAndSummarize() {
     .then((msg) => {
       // Then chain to process data
       const dataWeWant = msg // Processed data
-        .filter((item) => item.address.city.startsWith("C")) // Filter users from cities starting with 'C'
+        .filter((item) => item.address.city.charAt(0) === "C") // Filter users from cities starting with 'C'
         .map((user) => ({
           // Map to only id, name, and company name
           id: user.id,
